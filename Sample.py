@@ -17,6 +17,7 @@ class ShoppingCart:
     def add_item(self, item_to_purchase):
         """Appends an ItemToPurchase object to the cart list."""
         self.cart_items.append(item_to_purchase)
+        print("*** Item has been added ***")
 
     def remove_item(self, target_name):
         """Removes an item by name. Displays error if not found."""
@@ -29,6 +30,8 @@ class ShoppingCart:
         
         if not found:
             print("Item not found in cart. Nothing removed.")
+        else:
+            print("*** Item has been removed ***")
 
     def modify_item(self, modified_item):
         """Updates attributes of an existing item if they are not default."""
@@ -47,6 +50,8 @@ class ShoppingCart:
         
         if not found:
             print("Item not found in cart. Nothing modified.")
+        else:
+            print("*** Item has been modified ***")
 
     def get_num_items_in_cart(self):
         """Calculates total quantity of all items combined."""
@@ -90,61 +95,65 @@ class ShoppingCart:
 def print_menu(cart_object):
     """Displays the user menu loop and processes selections."""
     menu_text = (
-        "\nMENU\n"
+        "\n********** MENU **********\n"
         "a - Add item to cart\n"
         "r - Remove item from cart\n"
         "c - Change item quantity\n"
         "i - Output items' descriptions\n"
         "o - Output shopping cart\n"
         "q - Quit\n"
+        "**************************"
     )
     
     user_choice = ""
     while user_choice != 'q':
         print(menu_text)
-        user_choice = input("Choose an option:\n").strip().lower()
+        user_choice = input("Choose an option :").strip().lower()
         
         # Valid choice validation loop
         while user_choice not in ['a', 'r', 'c', 'i', 'o', 'q']:
             user_choice = input("Choose an option:\n").strip().lower()
 
         if user_choice == 'a':
-            print("\nADD ITEM TO CART")
-            name = input("Enter the item name:\n")
-            desc = input("Enter the item description:\n")
-            price = float(input("Enter the item price:\n"))
-            qty = int(input("Enter the item quantity:\n"))
+            print("\n *** ADD ITEM TO CART ***")
+            name = input("Enter the item name :")
+            desc = input("Enter the item description :")
+            price = float(input("Enter the item price :"))
+            qty = int(input("Enter the item quantity :"))
             
             new_item = ItemToPurchase(name, price, qty, desc)
             cart_object.add_item(new_item)
-            
+
         elif user_choice == 'r':
-            print("\nREMOVE ITEM FROM CART")
-            target = input("Enter name of item to remove:\n")
+            print("\n*** REMOVE ITEM FROM CART ***")
+            target = input("Enter name of item to remove :")
             cart_object.remove_item(target)
-            
+        
         elif user_choice == 'c':
-            print("\nCHANGE ITEM QUANTITY")
-            target_name = input("Enter the item name:\n")
-            new_qty = int(input("Enter the new quantity:\n"))
+            print("\n*** CHANGE ITEM QUANTITY ***")
+            target_name = input("Enter the item name :")
+            new_qty = int(input("Enter the new quantity :"))
             
             # Construct item with default fields except name and quantity
             mod_item = ItemToPurchase(item_name=target_name, item_quantity=new_qty)
             cart_object.modify_item(mod_item)
+            print("**************************\n")
             
         elif user_choice == 'i':
-            print("\nOUTPUT ITEMS' DESCRIPTIONS")
+            print("\n*** OUTPUT ITEMS' DESCRIPTIONS ***")
             cart_object.print_descriptions()
+            print("**************************\n")
             
         elif user_choice == 'o':
-            print("\nOUTPUT SHOPPING CART")
+            print("\n*** OUTPUT SHOPPING CART ***")
             cart_object.print_total()
+            print("**************************\n")
 
 
 def main():
     """Main entry point to initialize cart and start menu."""
-    cust_name = input("Enter customer's name:\n")
-    current_dt = input("Enter today's date:\n")
+    cust_name = input("Enter customer's name :")
+    current_dt = input("Enter today's date :")
     print(f"\nCustomer name: {cust_name}")
     print(f"Today's date: {current_dt}")
     
