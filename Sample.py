@@ -87,7 +87,7 @@ class ShoppingCart:
         """Prints the description summary for all items."""
         print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
         print() # Visual spacing
-        print("Item Descriptions")
+        print("Item Descriptions:")
         for item in self.cart_items:
             print(f"{item.item_name}: {item.item_description}")
 
@@ -116,9 +116,9 @@ def print_menu(cart_object):
 
         if user_choice == 'a':
             print("\n *** ADD ITEM TO CART ***")
-            name = input("Enter the item name :")
-            desc = input("Enter the item description :")
-            price = float(input("Enter the item price :"))
+            name = input("Enter the item name :").strip() 
+            desc = input("Enter the item description :").strip() 
+            price = float(input("Enter the item price $:"))
             qty = int(input("Enter the item quantity :"))
             
             new_item = ItemToPurchase(name, price, qty, desc)
@@ -126,12 +126,12 @@ def print_menu(cart_object):
 
         elif user_choice == 'r':
             print("\n*** REMOVE ITEM FROM CART ***")
-            target = input("Enter name of item to remove :")
+            target = input("Enter name of item to remove :").strip() 
             cart_object.remove_item(target)
         
         elif user_choice == 'c':
             print("\n*** CHANGE ITEM QUANTITY ***")
-            target_name = input("Enter the item name :")
+            target_name = input("Enter the item name :").strip() 
             new_qty = int(input("Enter the new quantity :"))
             
             # Construct item with default fields except name and quantity
@@ -152,15 +152,14 @@ def print_menu(cart_object):
 
 def main():
     """Main entry point to initialize cart and start menu."""
-    cust_name = input("Enter customer's name :")
-    current_dt = input("Enter today's date :")
+    cust_name = input("Enter customer's name :").strip() 
+    current_dt = input("Enter today's date :").strip() 
     print(f"\nCustomer name: {cust_name}")
     print(f"Today's date: {current_dt}")
     
     # Initialize the custom cart
     user_cart = ShoppingCart(cust_name, current_dt)
     print_menu(user_cart)
-
 
 if __name__ == "__main__":
     main()
